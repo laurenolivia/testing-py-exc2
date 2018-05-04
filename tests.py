@@ -50,6 +50,10 @@ class PartyTestsDatabase(unittest.TestCase):
         # Connect to test database (uncomment when testing database)
         connect_to_db(app, "postgresql:///testdb")
 
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess['RSVP'] = True
+
         # Create tables and add sample data (uncomment when testing database)
         db.create_all()
         example_data()
