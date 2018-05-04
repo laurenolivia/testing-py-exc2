@@ -23,6 +23,7 @@ def example_data():
     """Create example data for the test database."""
     #FIXME: write a function that creates a game and adds it to the database.
 
+    #create instance of Game class
     new_game = Game(name = "Jumprope", description = "playground peaceful playing")
 
     print new_game.name

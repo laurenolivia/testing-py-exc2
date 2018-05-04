@@ -13,6 +13,7 @@ app.secret_key = "SECRETSECRETSECRET"
 def homepage():
     """Show homepage."""
 
+
     return render_template("homepage.html")
 
 
@@ -23,6 +24,7 @@ def rsvp():
     name = request.form.get("name")
     email = request.form.get("email")
 
+    #setting dictionary
     session['RSVP'] = True
     flash("Yay!")
     return redirect("/")
@@ -30,9 +32,16 @@ def rsvp():
 
 @app.route("/games")
 def games():
-    games = Game.query.all()
-    return render_template("games.html", games=games)
 
+    #check for existence of RSVP in session
+    if "RSVP" in session:
+        games = Game.query.all()
+        return render_template("games.html", games=games)
+        
+    else:
+        return redirect("/")
+
+        
 
 if __name__ == "__main__":
     app.debug = True
